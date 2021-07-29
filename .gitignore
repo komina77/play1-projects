@@ -12,5 +12,16 @@ tmp/
 test-result
 server.pid
 *.eml
-/dist/
 .cache
+.project
+.classpath
+.dbeaver
+.settings
+.pydevproject
+eclipse/
+lib/
+modules/
+#
+/h2server
+/savemail
+/samples
