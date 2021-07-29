@@ -1,0 +1,4 @@
+self: play -> launcher 0.1.1
+
+require:
+    - play 1.5.3

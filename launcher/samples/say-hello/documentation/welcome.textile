@@ -1,0 +1,48 @@
+h1. Hello world
+
+2つのサンプルが含まれています。
+一つはJavaクラスのmainメソッドからHello Worldを表示するもの。
+もう一つはmainメソッドからGroovyスクリプトを実行してHello Worldを表示するもの。
+
+h2. JavaでHello World
+
+h3. 実行方法
+
+<pre>
+> play launcher:run --class=jobs.SampleJob a1 a2 a3 
+</pre>
+
+h3. 実行結果
+
+<pre>
+02:18:04,167 INFO  ~ Application 'say-hello' is now started !
+Hello world.
+args[0]:        --class=jobs.SampleJob
+args[1]:        a1
+args[2]:        a2
+args[3]:        a3
+02:18:04,183 INFO  ~ jobs.SampleJob.main() returns 0.
+02:18:04,183 INFO  ~ Application 'say-hello' is ended !
+</pre>
+
+h2. GroovyスクリプトでHello World
+
+h3. 実行方法
+
+<pre> 
+> play launcher:run --class=jobs.SampleJob2 a1 a2 a3 
+</pre>
+
+h3. 実行結果
+
+<pre>
+02:20:52,371 INFO  ~ Application 'say-hello' is now started !
+02:20:52,386 INFO  ~ Launch script: /scripts/SayHello.groovy
+Hello world.
+args[0]:        --class=jobs.SampleJob2
+args[1]:        a1
+args[2]:        a2
+args[3]:        a3
+02:20:53,293 INFO  ~ jobs.SampleJob2.main() returns 0.
+02:20:53,293 INFO  ~ Application 'say-hello' is ended !
+</pre>

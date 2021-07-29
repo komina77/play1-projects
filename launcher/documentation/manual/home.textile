@@ -1,0 +1,53 @@
+h1. Launcher
+
+h2. 概要
+
+launcherモジュールを利用すると、Playframework1の強力なサポートを利用した単体のプログラムを実行することができます。
+Webサーバは起動しません。
+
+* httpポートは開かず、Playframework の初期化を行った後に実行します。
+* Playframework の設定ファイルや各種プラグインの機能（データベースや非同期ジョブなど）を利用したプログラミングが可能です。
+* SystemExitExceptionをスローすることでコマンドラインに終了コードを返すことができます。
+* JP1やjenkinsなどのジョブ管理ツールで起動を制御することが可能になります。
+* jar内のクラス、app配下のクラス、共にサポートします。
+
+h2. Sample application
+
+* say-hello
+JavaクラスとGroovyスクリプトからの2通りの方法で、<code>System.io.println</code> で "Hello World." するサンプルです。
+
+h2. How to use
+
+# <code>public static void main(String[] args)</code>メソッドを持つ実行可能なクラスを用意します。
+app配下、jar内、共にサポートします。
+# コマンドラインより実行します。
+<pre>> play launcher:run --class=jobs.SampleJob arg1 arg2 arg3</pre>
+
+オプション <code>--class=</code> で実行するクラスを完全修飾名で指定します。必須です。
+以降は任意で、mainメソッドの引数に設定されます。
+
+
+
+h2. Configuration
+
+launcherのための設定はありません。
+
+h2. Commands
+
+モジュールコマンドは launcher:run のみです。
+
+@play launcher:run yourAppDir --class=info.komina.MyJob@
+
+h2. Tips
+
+mainメソッドにメインの処理を書かずに、playのジョブをキックする形をとる方が通常のジョブとしても使用できるので汎用性が高いです。
+playのジョブにmainメソッドを書く方法もあります。
+
+<code>--%launcher</code> のようにフレームワークIDを指定して実行できますので、リソースの干渉を避ければWebアプリ稼働中の裏での実行も可能です。
+
+Playframework の設定ファイルや各種プラグインの機能が有効なので、制限しないと @@play.jobs.OnApplicationStart()@ のようなスケジュールジョブも同時に動いてしまいます。
+それを防ぐには下記のように、フレームワークIDを指定してJobsPluginを無効にしてください。
+
+p(. application.conf
+<code>%launcher.plugins.disable=play.jobs.JobsPlugin</code>
+
