@@ -3,7 +3,7 @@
 require:
     - play 1.5.3
     - play -> docviewer
-    - localLibrary  -> launcher 0.1.1
+    - localLibrary  -> launcher 0.1.2
 
 
 repositories:

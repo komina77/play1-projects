@@ -14,7 +14,7 @@ public class SampleJob2 {
             new GroovyLauncher().setParameter("args", args).compile(vf).executeScript();
         } catch (Exception e) {
             Logger.error(e, "Catch exception.");
-            throw new SystemExitException(-1);
+            throw new SystemExitException(-1, e);
         }
         throw new SystemExitException(0);
     }

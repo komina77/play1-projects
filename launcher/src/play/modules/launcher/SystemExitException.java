@@ -17,6 +17,16 @@ public class SystemExitException extends Exception {
     }
 
     /**
+     * コンストラクタ
+     * @param exitCode 終了コード
+     * @param cause 例外
+     */
+    public SystemExitException(int exitCode, Throwable cause) {
+        super(cause);
+        this.exitCode = exitCode;
+    }
+
+    /**
      * @return 設定された終了コードを取得する.
      */
     public int getExitCode() {
