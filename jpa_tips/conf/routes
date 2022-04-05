@@ -5,6 +5,11 @@
 # Home page
 GET     /                                       Application.index
 
+GET     /user-list                              UserKanri.list
+GET     /user-edit                              UserKanri.view
+*       /user-edit                              UserKanri.edit
+
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

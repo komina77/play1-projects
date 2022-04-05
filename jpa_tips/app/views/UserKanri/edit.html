@@ -1,0 +1,50 @@
+#{extends 'main.html' /}*{<meta charset="UTF-8">}*
+#{set title:'ユーザ作成・編集' /}
+
+<form method="post" action="@{UserKanri.edit }" >
+
+<ul>
+  <li>#{a @UserKanri.list() }一覧に戻る#{/a}</li>
+  <li>#{a @UserKanri.view(user.id) }リロードする#{/a}</li>
+  <li><input type="submit" value="登録" /></li>
+</ul>
+
+#{if user }
+
+#{field 'user.id' }
+    <div>
+        <label for="${field.id}" >&{field.name}</label>
+        <input type="text" id="${field.id}" value="${field.value}" name="${field.name}" readonly />
+    </div>
+#{/field}
+
+#{field 'user.名前' }
+    <div>
+        <label for="${field.id}" >&{field.name}</label>
+        <input type="text" class="${field.errorClass}" id="${field.id}" value="${field.value}" name="${field.name}"  />
+          #{if field.error}<span>${field.error}</span>#{/if}
+    </div>
+#{/field}
+
+#{field 'user.生年月日' }
+    <div>
+        <label for="${field.id}" >&{field.name}（yyyyMMdd形式）</label>
+        <input type="text" class="${field.errorClass}" id="${field.id}" value="${field.value?.format('yyyyMMdd')}" name="${field.name}" size="8" />
+          #{if field.error}<span>${field.error}</span>#{/if}
+    </div>
+#{/field}
+
+#{field 'user.備考' }
+    <div>
+        <label for="${field.id}" >&{field.name}</label>
+        <textarea id="${field.id}" name="${field.name}" rows="5" >${field.value?.raw()}</textarea>
+    </div>
+#{/field}
+
+<input type="hidden" name="version" value="${user.更新日時?.getTime()}" />
+
+#{/if}#{else}
+<span>データが見つかりません.</span>
+#{/else}
+
+</form>

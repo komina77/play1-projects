@@ -1,4 +1,7 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'index' /}
 
-#{welcome /}
+<h1>目次</h1>
+<ul>
+  <li>#{a @UserKanri.list() }ユーザ管理#{/a}</li>
+</ul>

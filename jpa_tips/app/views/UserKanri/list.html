@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+#{set title:'ユーザ一覧' /}
+
+<ul>
+  <li>
+    #{a @UserKanri.view() }新規作成#{/a}
+  </li>
+</ul>
+
+#{list list }
+  #{if _isFirst}
+<div>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>生年月日</th>
+        <th>備考</th>
+        <th>更新日時</th>
+      </tr>
+    </thead>
+    <tbody>
+  #{/if}
+      <tr>
+        <td>#{a @UserKanri.view(_.id)}${_.id}#{/a}</td>
+        <td>${_.名前}</td>
+        <td>${_.生年月日?.format('yyyy-MM-dd')}</td>
+        <td>#{shorten str:_.備考, length:20 /}</td>
+        <td>${_.更新日時?.format('yyyy-MM-dd HH:mm:ss')}</td>
+      </tr>
+  #{if _isLast}
+    </tbody>
+  </table>
+  #{/if}
+</div>
+#{/list}#{else}
+<soan>データありません.</span>
+#{/else}

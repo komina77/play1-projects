@@ -1,3 +1,8 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+
+user.id=ID
+user.名前=名前
+user.生年月日=生年月日
+user.備考=備考
