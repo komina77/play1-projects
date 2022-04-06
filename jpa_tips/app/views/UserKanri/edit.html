@@ -7,28 +7,39 @@
   <li>#{a @UserKanri.list() }一覧に戻る#{/a}</li>
   <li>#{a @UserKanri.view(user.id) }リロードする#{/a}</li>
   <li><input type="submit" value="登録" /></li>
+#{if user.id}
+  <li>#{a @UserKanri.delete(user.id, user.更新日時?.getTime()) }削除する#{/a}</li>
+#{/if}
 </ul>
 
 #{if user }
 
 #{field 'user.id' }
     <div>
-        <label for="${field.id}" >&{field.name}</label>
+        <div><label for="${field.id}" >&{field.name}</label></div>
         <input type="text" id="${field.id}" value="${field.value}" name="${field.name}" readonly />
     </div>
 #{/field}
 
 #{field 'user.名前' }
     <div>
-        <label for="${field.id}" >&{field.name}</label>
+        <div><label for="${field.id}" >&{field.name}</label></div>
         <input type="text" class="${field.errorClass}" id="${field.id}" value="${field.value}" name="${field.name}"  />
+          #{if field.error}<span>${field.error}</span>#{/if}
+    </div>
+#{/field}
+
+#{field 'user.パスワード'}
+    <div>
+        <div><label for="${field.id}" >&{field.name}</label></div>
+        <input type="password" class="${field.errorClass}" id="${field.id}" value="${field.value}" name="${field.name}" autocomplete="new-password" />
           #{if field.error}<span>${field.error}</span>#{/if}
     </div>
 #{/field}
 
 #{field 'user.生年月日' }
     <div>
-        <label for="${field.id}" >&{field.name}（yyyyMMdd形式）</label>
+        <div><label for="${field.id}" >&{field.name}（yyyyMMdd形式）</label></div>
         <input type="text" class="${field.errorClass}" id="${field.id}" value="${field.value?.format('yyyyMMdd')}" name="${field.name}" size="8" />
           #{if field.error}<span>${field.error}</span>#{/if}
     </div>
@@ -36,7 +47,7 @@
 
 #{field 'user.備考' }
     <div>
-        <label for="${field.id}" >&{field.name}</label>
+        <div><label for="${field.id}" >&{field.name}</label></div>
         <textarea id="${field.id}" name="${field.name}" rows="5" >${field.value?.raw()}</textarea>
     </div>
 #{/field}

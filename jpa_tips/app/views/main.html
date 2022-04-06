@@ -9,6 +9,15 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     </head>
     <body>
+<ul>
+#{if session.username}
+  <li>${session.username}さんログイン中／<a href="@{Secure.logout()}">ログアウトする</a></li>
+#{/if}#{else}
+  <li><a href="@{Secure.login()}">ログインする</a></li>
+#{/else}
+  <li>#{a @Application.index() }ホームへ#{/a}</li>
+</ul>
+    
 #{if flash.error}
 <span style="color: red;">${flash.error}</span><br/>
 #{/if}

@@ -1,7 +1,12 @@
 #{extends 'main.html' /}
 #{set title:'index' /}
 
+
 <h1>目次</h1>
 <ul>
+#{if session.username}
   <li>#{a @UserKanri.list() }ユーザ管理#{/a}</li>
+#{/if}#{else}
+  <li>ログインしてください（admin/adminで仮ログインできます）</li>
+#{/else}
 </ul>
