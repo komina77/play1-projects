@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 
 import models.ImageFile;
 import models.UserMst;
+import play.Logger;
 import play.cache.CacheFor;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
@@ -74,6 +75,7 @@ public class ImageFileKanri extends Controller {
         if (id != null) {
             ImageFile imageFile = ImageFile.findById(id);
             if (imageFile != null) {
+                Logger.info("rederBinary(%s)", imageFile.ファイル.getFile().getName());
                 renderBinary(imageFile.ファイル.getFile());
             }
         }
