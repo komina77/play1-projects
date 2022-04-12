@@ -1,11 +1,15 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
@@ -32,7 +36,7 @@ import play.libs.Crypto;
 public class UserMst extends Model {
 
     @Required
-    @MaxSize(10)
+    @MaxSize(20)
     @Unique
     @Column(nullable = false, unique = true)
     public String 名前;
@@ -67,6 +71,18 @@ public class UserMst extends Model {
     @Column(nullable = false)
     public Date 更新日時;
 
+    /**
+     * アイコン画像（3枚まで付けられる）.
+     * 子テーブルに親への参照フィールドを設けてmappedByに指定すると関係テーブルが所略される.
+     */
+    @OneToMany(mappedBy = "所有ユーザ")
+    public Set<ImageFile> 画像リスト;
+    /**
+     * デフォルトのアイコン画像（3枚の中から選ぶ）
+     */
+    @OneToOne
+    public ImageFile デフォルト画像;
+
     /** fieldタグのvalueでgetter必要 */
     public String get名前() {
         return this.名前;
@@ -86,7 +102,7 @@ public class UserMst extends Model {
         パスワード = s;
         if (s != null && s.length() > 0) {
             パスワードハッシュ = generatePasswordHash(パスワード);
-            Logger.info("パスワードハッシュ再算出.");
+            Logger.info("[UserMst] パスワードハッシュ再算出.");
         }
     }
 

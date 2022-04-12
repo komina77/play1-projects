@@ -1,0 +1,64 @@
+#{extends 'main.html' /}
+#{set title:'画像ファイル管理' /}
+
+<ul>
+  <li>#{a @UserKanri.list() }ユーザ管理へ#{/a}</li>
+</ul>
+
+<h1>${user.名前}さんの画像</h1>
+
+#{form @ImageFileKanri.edit(), method:'POST' }
+#{list user.画像リスト }
+  #{if _isFirst }
+<input type="hidden" name="userId" value="${user.id}" />
+<input type="submit" value="更新する"/>
+<table border="1">
+  <thead>
+    <tr>
+      <th>デフォルト画像</th>
+      <th>ID</th>
+      <th>キャプション</th>
+      <th>画像</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+  #{/if}
+    <tr>
+      <td><input type="radio" name="defaultImage" value="${_.id}" #{if _.id == user.デフォルト画像?.id }checked#{/if}/></td>
+      <td>${_.id}</td>
+      <td>
+        <input type="text" name="caption[${_.id}]" value="${_.キャプション}" />
+        <span>#{error 'caption[' + _.id + ']' /}</span>
+      </td>
+      <td><image src="@{ImageFileKanri.store(_.id)}" /></td>
+      <td><input type="checkbox" name="delImage" value="${_.id}" /></td>
+      <!-- 画像を削除すること -->
+    </tr>
+  #{if _isLast }
+  </tbody>
+</table>
+  #{/if}
+#{/list}
+#{else}
+<span>データありません.</span>
+#{/else}
+#{/form}
+#{if user.画像リスト?.size() < 3 }
+<span>画像は3件まアップロードできます.</span>
+<h2>ファイルアップロード</h2>
+  #{form @ImageFileKanri.upload(), method:'POST', enctype:'multipart/form-data'}
+  <div>
+    <div><label for="imageFile_キャプション">キャプション</label></div>
+    <input type="text" name="imageFile.キャプション" value="" id="imageFile_キャプション" size="20">
+    <span>#{ifError 'imageFile.キャプション'} #{error 'imageFile.キャプション' /} #{/ifError}</span>
+  </div>
+  <div>
+    <div><label for="imageFile_ファイル">画像ファイル</label></div>
+    <input type="file" name="imageFile.ファイル" id="imageFile_ファイル" accept="image/jpeg">
+    <span>#{ifError 'imageFile.ファイル'} #{error 'imageFile.ファイル' /} #{/ifError}</span>
+  </div>
+  <input type="submit" value="アップロード" />
+  <input type="hidden" name="imageFile.所有ユーザ.id" value="${user.id}" />
+  #{/form}
+#{/if}

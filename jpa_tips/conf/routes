@@ -4,11 +4,17 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /test                                   Application.test
 
 GET     /user-list                              UserKanri.list
 GET     /user-edit/{id}                         UserKanri.view
 *       /user-edit                              UserKanri.edit
 GET     /user-delete/{id}/{version}             UserKanri.delete
+
+GET     /image-file/{userId}                    ImageFileKanri.index
+POST    /image-file/edit                        ImageFileKanri.edit
+POST    /image-file/upload                      ImageFileKanri.upload
+GET     /image-file/store/{id}                  ImageFileKanri.store          
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

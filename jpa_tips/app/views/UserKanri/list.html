@@ -12,6 +12,7 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>アイコン</th>
         <th>名前</th>
         <th>生年月日</th>
         <th>備考</th>
@@ -22,6 +23,12 @@
   #{/if}
       <tr>
         <td>#{a @UserKanri.view(_.id)}${_.id}#{/a}</td>
+        <td>
+          #{a @ImageFileKanri.index(_.id) }
+            #{if _.デフォルト画像} <image src="@{ImageFileKanri.store(_.デフォルト画像.id)}" /> #{/if}
+            #{else} 未選択#{/else}
+          #{/a}
+        </td>
         <td>${_.名前}</td>
         <td>${_.生年月日?.format('yyyy-MM-dd')}</td>
         <td>#{shorten str:_.備考, length:20 /}</td>
@@ -33,5 +40,5 @@
   #{/if}
 </div>
 #{/list}#{else}
-<soan>データありません.</span>
+<span>データありません.</span>
 #{/else}
