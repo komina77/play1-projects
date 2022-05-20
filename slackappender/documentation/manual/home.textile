@@ -1,0 +1,4 @@
+h1. slack appender for log4j
+
+use Incoming Webhooks
+
